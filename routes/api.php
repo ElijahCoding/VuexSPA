@@ -10,4 +10,6 @@ Route::post('/logout', 'Auth\AuthController@logout');
 // Protect
 Route::group(['middleware' => 'jwt.auth'], function() {
   Route::get('/me', 'Auth\AuthController@user');
+
+  Route::get('/timeline', 'TimelineController@index');
 });

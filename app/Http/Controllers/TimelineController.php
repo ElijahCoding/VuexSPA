@@ -6,5 +6,15 @@ use Illuminate\Http\Request;
 
 class TimelineController extends Controller
 {
+    public function __construct()
+    {
+
+    }
     
+    public function index()
+    {
+      return response()->json([
+        'data' => 'Timeline index'
+      ], 200);
+    }
 }
