@@ -5,13 +5,13 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="#">
+                    <form class="form-horizontal" role="form" @submit.prevent="submit">
 
                         <div class="form-group">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" autofocus v-model="name">
                             </div>
                         </div>
 
@@ -19,7 +19,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" required>
+                                <input id="email" type="email" class="form-control" name="email" v-model="email">
                             </div>
                         </div>
 
@@ -27,7 +27,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" v-model="password">
                             </div>
                         </div>
 
@@ -54,12 +54,24 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data () {
       return {
         name: null,
         email: null,
         password: null
+      }
+    },
+
+    methods: {
+      ...mapActions({
+        register: 'auth/register'
+      }),
+
+      submit () {
+        this.register()
       }
     }
   }
