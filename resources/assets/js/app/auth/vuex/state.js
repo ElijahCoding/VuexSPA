@@ -1,6 +1,8 @@
 export default {
   user: {
-    authenticated: false,
-    data: null
+    authenticated: true,
+    data: {
+      name: 'Elijah'
+    }
   }
 }

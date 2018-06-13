@@ -23,19 +23,18 @@
                   &nbsp;
               </ul>
 
-              <ul class="nav navbar-nav navbar-right">
-                  <li><router-link :to="{ name: 'timeline' }">Timeline</router-link></li>
+              <ul class="nav navbar-nav navbar-right" v-if="!user.authenticated">
                   <li><router-link :to="{ name: 'login' }">Login</router-link></li>
                   <li><router-link :to="{ name: 'register' }">Register</router-link></li>
               </ul>
 
               <!-- Right Side Of Navbar -->
-              <ul class="nav navbar-nav navbar-right">
+              <ul class="nav navbar-nav navbar-right" v-if="user.authenticated">
                   <!-- Authentication Links -->
-                  <!-- <li><router-link :to="{ name: 'timeline' }">Timeline</router-link></li> -->
+                  <li><router-link :to="{ name: 'timeline' }">Timeline</router-link></li>
                   <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Elijah <span class="caret"></span>
+                        {{ user.data.name }} <span class="caret"></span>
                       </a>
 
                       <ul class="dropdown-menu" role="menu">
@@ -50,3 +49,13 @@
   </nav>
 
 </template>
+
+<script>
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: mapGetters({
+      user: 'auth/user'
+    })
+  }
+</script>

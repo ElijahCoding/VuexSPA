@@ -46295,7 +46295,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(79)
 /* template */
 var __vue_template__ = __webpack_require__(60)
 /* template functional */
@@ -46371,39 +46371,68 @@ var render = function() {
             _vm._v("\n                 \n            ")
           ]),
           _vm._v(" "),
-          _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
-            _c(
-              "li",
-              [
-                _c("router-link", { attrs: { to: { name: "timeline" } } }, [
-                  _vm._v("Timeline")
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c("router-link", { attrs: { to: { name: "login" } } }, [
-                  _vm._v("Login")
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              [
-                _c("router-link", { attrs: { to: { name: "register" } } }, [
-                  _vm._v("Register")
-                ])
-              ],
-              1
-            )
-          ]),
+          !_vm.user.authenticated
+            ? _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { name: "login" } } }, [
+                      _vm._v("Login")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { name: "register" } } }, [
+                      _vm._v("Register")
+                    ])
+                  ],
+                  1
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _vm._m(1)
+          _vm.user.authenticated
+            ? _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: { name: "timeline" } } }, [
+                      _vm._v("Timeline")
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("li", { staticClass: "dropdown" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "dropdown-toggle",
+                      attrs: {
+                        href: "#",
+                        "data-toggle": "dropdown",
+                        role: "button",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                      " +
+                          _vm._s(_vm.user.data.name) +
+                          " "
+                      ),
+                      _c("span", { staticClass: "caret" })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              ])
+            : _vm._e()
         ]
       )
     ])
@@ -46439,29 +46468,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "nav navbar-nav navbar-right" }, [
-      _c("li", { staticClass: "dropdown" }, [
-        _c(
-          "a",
-          {
-            staticClass: "dropdown-toggle",
-            attrs: {
-              href: "#",
-              "data-toggle": "dropdown",
-              role: "button",
-              "aria-expanded": "false"
-            }
-          },
-          [
-            _vm._v("\n                      Elijah "),
-            _c("span", { staticClass: "caret" })
-          ]
-        ),
-        _vm._v(" "),
-        _c("ul", { staticClass: "dropdown-menu", attrs: { role: "menu" } }, [
-          _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Logout")])])
-        ])
-      ])
+    return _c("ul", { staticClass: "dropdown-menu", attrs: { role: "menu" } }, [
+      _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Logout")])])
     ])
   }
 ]
@@ -46520,7 +46528,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* unused harmony export install */
 /* unused harmony export mapState */
 /* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
 /* unused harmony export mapActions */
 /* unused harmony export createNamespacedHelpers */
 /**
@@ -47467,7 +47475,6 @@ var index_esm = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__actions___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__actions__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getters__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getters___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__getters__);
 
 
 
@@ -47488,8 +47495,10 @@ var index_esm = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
   user: {
-    authenticated: false,
-    data: null
+    authenticated: true,
+    data: {
+      name: 'Elijah'
+    }
   }
 });
 
@@ -47507,9 +47516,82 @@ var index_esm = {
 
 /***/ }),
 /* 78 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "user", function() { return user; });
+var user = function user(state) {
+  return state.user;
+};
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(73);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+    user: 'auth/user'
+  })
+});
 
 /***/ })
 /******/ ]);
