@@ -1,9 +1,9 @@
 <template>
     <div>
       <navigation></navigation>
-      
+
       <div class="container">
-        router
+        <router-view></router-view>
       </div>
     </div>
 </template>
