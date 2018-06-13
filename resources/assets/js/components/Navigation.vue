@@ -12,7 +12,9 @@
               </button>
 
               <!-- Branding Image -->
-              <a class="navbar-brand" href="#">Home</a>
+              <router-link class="navbar-brand" :to="{ name: 'home' }">
+                Home
+              </router-link>
           </div>
 
           <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -23,7 +25,7 @@
 
               <ul class="nav navbar-nav navbar-right">
                   <li><router-link :to="{ name: 'login' }">Login</router-link></li>
-                  <li><a href="#">Register</a></li>
+                  <li><router-link :to="{ name: 'register' }">Register</router-link></li>
               </ul>
 
               <!-- Right Side Of Navbar -->
