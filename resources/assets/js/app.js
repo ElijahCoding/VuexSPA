@@ -28,6 +28,7 @@ Vue.component('navigation', require('./components/Navigation.vue'));
 
 store.dispatch('auth/setToken').then(() => {
   store.dispatch('auth/fetchUser').catch(() => {
+    store.dispatch('auth/clearAuth')
     router.replace({ name: 'login' })
   })
 })

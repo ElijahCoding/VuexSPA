@@ -15830,6 +15830,7 @@ Vue.component('navigation', __webpack_require__(69));
 
 __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('auth/setToken').then(function () {
   __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('auth/fetchUser').catch(function () {
+    __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('auth/clearAuth');
     __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].replace({ name: 'login' });
   });
 });
@@ -19814,6 +19815,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkTokenExists", function() { return checkTokenExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearAuth", function() { return clearAuth; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers__ = __webpack_require__(83);
@@ -19884,6 +19886,15 @@ var checkTokenExists = function checkTokenExists(_ref7, token) {
     }
     return Promise.resolve(token);
   });
+};
+
+var clearAuth = function clearAuth(_ref8, token) {
+  var commit = _ref8.commit;
+
+  commit('setAuthenticated', false);
+  commit('setUserData', null);
+  commit('setToken', null);
+  Object(__WEBPACK_IMPORTED_MODULE_1__helpers__["a" /* setHttpToken */])(null);
 };
 
 /***/ }),
