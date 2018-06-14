@@ -8,7 +8,7 @@ export const register = ({ dispatch }, { payload, context }) => {
 
 export const login = ({ dispatch }, { payload, context }) => {
   return axios.post('/api/login', payload).then((response) => {
-    dispatch('setToken').then(() => {
+    dispatch('setToken', response.data.meta.token).then(() => {
       console.log('fetch user');
     })
   }).catch((error) => {
