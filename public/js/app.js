@@ -16011,7 +16011,7 @@ var Register = __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('register',
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(81)
 /* template */
 var __vue_template__ = __webpack_require__(23)
 /* template functional */
@@ -16059,53 +16059,99 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [_vm._v("Login")]),
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [_vm._v("Login")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel-body" }, [
+          _vm.errors.root
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.errors.root) +
+                    "\n                "
+                )
+              ])
+            : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _c("div", { staticClass: "alert alert-danger" }, [
-              _vm._v(
-                "\n                    Could not sign you in with those details\n                  "
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "form",
-              { staticClass: "form-horizontal", attrs: { role: "form" } },
-              [
-                _c("div", { staticClass: "form-group" }, [
+          _c(
+            "form",
+            {
+              staticClass: "form-horizontal",
+              attrs: { role: "form" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submit($event)
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "form-group",
+                  class: { "has-error": _vm.errors.email }
+                },
+                [
                   _c(
                     "label",
                     {
                       staticClass: "col-md-4 control-label",
                       attrs: { for: "email" }
                     },
-                    [_vm._v("E-Mail Address")]
+                    [_vm._v("Email address")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.email,
+                          expression: "email"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         id: "email",
-                        type: "email",
+                        type: "text",
                         name: "email",
                         autofocus: ""
+                      },
+                      domProps: { value: _vm.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.email = $event.target.value
+                        }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.email
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.email[0]) +
+                              "\n                            "
+                          )
+                        ])
+                      : _vm._e()
                   ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "form-group",
+                  class: { "has-error": _vm.errors.password }
+                },
+                [
                   _c(
                     "label",
                     {
@@ -16117,36 +16163,68 @@ var staticRenderFns = [
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.password,
+                          expression: "password"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         id: "password",
                         type: "password",
                         name: "password"
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "col-md-8 col-md-offset-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
                       },
-                      [
-                        _vm._v(
-                          "\n                                  Login\n                              "
-                        )
-                      ]
-                    )
+                      domProps: { value: _vm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.password = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.password
+                      ? _c("span", { staticClass: "help-block" }, [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.errors.password[0]) +
+                              "\n                            "
+                          )
+                        ])
+                      : _vm._e()
                   ])
-                ])
-              ]
-            )
-          ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
         ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-4" }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+          [
+            _vm._v(
+              "\n                                Login\n                            "
+            )
+          ]
+        )
       ])
     ])
   }
@@ -16795,6 +16873,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 var register = function register(_ref, _ref2) {
   var dispatch = _ref.dispatch;
   var payload = _ref2.payload,
@@ -16803,6 +16882,16 @@ var register = function register(_ref, _ref2) {
   return axios.post('/api/register', payload).then(function (response) {
     console.log(response);
   }).catch(function (error) {
+    context.errors = error.response.data.errors;
+  });
+};
+
+var login = function login(_ref3, _ref4) {
+  var dispatch = _ref3.dispatch;
+  var payload = _ref4.payload,
+      context = _ref4.context;
+
+  return axios.post('/api/login', payload).then(function (response) {}).catch(function (error) {
     context.errors = error.response.data.errors;
   });
 };
@@ -47987,6 +48076,101 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(4);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: null,
+      password: null,
+      errors: []
+    };
+  },
+
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapActions */])({
+    login: 'auth/login'
+  }), {
+    submit: function submit() {
+      this.login({
+        payload: {
+          email: this.email,
+          password: this.password
+        },
+        context: this
+      });
+    }
+  })
+});
 
 /***/ })
 /******/ ]);
