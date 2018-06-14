@@ -15828,6 +15828,12 @@ window.Vue = __webpack_require__(1);
 Vue.component('app', __webpack_require__(67));
 Vue.component('navigation', __webpack_require__(69));
 
+__WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('auth/setToken').then(function () {
+  __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */].dispatch('auth/fetchUser').catch(function () {
+    __WEBPACK_IMPORTED_MODULE_0__router__["a" /* default */].replace({ name: 'login' });
+  });
+});
+
 var app = new Vue({
   el: '#app',
   store: __WEBPACK_IMPORTED_MODULE_1__vuex__["a" /* default */],
@@ -19807,9 +19813,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkTokenExists", function() { return checkTokenExists; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_localforage__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_localforage__);
+
 
 
 
@@ -19854,8 +19864,26 @@ var setToken = function setToken(_ref6, token) {
   var commit = _ref6.commit,
       dispatch = _ref6.dispatch;
 
+  if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
+    return dispatch('checkTokenExists').then(function (token) {
+      Object(__WEBPACK_IMPORTED_MODULE_1__helpers__["a" /* setHttpToken */])(token);
+    });
+  }
+
   commit('setToken', token);
   Object(__WEBPACK_IMPORTED_MODULE_1__helpers__["a" /* setHttpToken */])(token);
+};
+
+var checkTokenExists = function checkTokenExists(_ref7, token) {
+  var commit = _ref7.commit,
+      dispatch = _ref7.dispatch;
+
+  return __WEBPACK_IMPORTED_MODULE_2_localforage___default.a.getItem('authtoken').then(function (token) {
+    if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
+      return Promise.reject('NO_STORAGE_TOKEN');
+    }
+    return Promise.resolve(token);
+  });
 };
 
 /***/ }),
