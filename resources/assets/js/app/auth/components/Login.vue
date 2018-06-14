@@ -70,6 +70,8 @@
             password: this.password
           },
           context: this
+        }).then(() => {
+          this.$router.replace({ name: 'home' })
         })
       }
     }

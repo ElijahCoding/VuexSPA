@@ -18938,12 +18938,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     login: 'auth/login'
   }), {
     submit: function submit() {
+      var _this = this;
+
       this.login({
         payload: {
           email: this.email,
           password: this.password
         },
         context: this
+      }).then(function () {
+        _this.$router.replace({ name: 'home' });
       });
     }
   })
@@ -19268,6 +19272,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     register: 'auth/register'
   }), {
     submit: function submit() {
+      var _this = this;
+
       this.register({
         payload: {
           name: this.name,
@@ -19275,6 +19281,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           password: this.password
         },
         context: this
+      }).then(function () {
+        _this.$router.replace({ name: 'home' });
       });
     }
   })
@@ -19764,12 +19772,29 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthenticated", function() { return setAuthenticated; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setUserData", function() { return setUserData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_localforage__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_localforage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_localforage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+
 
 
 var setToken = function setToken(state, token) {
+    if (Object(__WEBPACK_IMPORTED_MODULE_1_lodash__["isEmpty"])(token)) {
+        __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.removeItem('authtoken', token);
+        return;
+    }
     __WEBPACK_IMPORTED_MODULE_0_localforage___default.a.setItem('authtoken', token);
+};
+
+var setAuthenticated = function setAuthenticated(state, trueOrFalse) {
+    state.user.authenticated = trueOrFalse;
+};
+
+var setUserData = function setUserData(state, data) {
+    state.user.data = data;
 };
 
 /***/ }),
@@ -19780,7 +19805,14 @@ var setToken = function setToken(state, token) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUser", function() { return fetchUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helpers__ = __webpack_require__(83);
+
+
+
 var register = function register(_ref, _ref2) {
   var dispatch = _ref.dispatch;
   var payload = _ref2.payload,
@@ -19800,18 +19832,28 @@ var login = function login(_ref3, _ref4) {
 
   return axios.post('/api/login', payload).then(function (response) {
     dispatch('setToken', response.data.meta.token).then(function () {
-      console.log('fetch user');
+      dispatch('fetchUser');
     });
   }).catch(function (error) {
     context.errors = error.response.data.errors;
   });
 };
 
-var setToken = function setToken(_ref5, token) {
-  var commit = _ref5.commit,
-      dispatch = _ref5.dispatch;
+var fetchUser = function fetchUser(_ref5) {
+  var commit = _ref5.commit;
+
+  return axios.get('/api/me').then(function (response) {
+    commit('setAuthenticated', true);
+    commit('setUserData', response.data.data);
+  });
+};
+
+var setToken = function setToken(_ref6, token) {
+  var commit = _ref6.commit,
+      dispatch = _ref6.dispatch;
 
   commit('setToken', token);
+  Object(__WEBPACK_IMPORTED_MODULE_1__helpers__["a" /* setHttpToken */])(token);
 };
 
 /***/ }),
@@ -50994,6 +51036,34 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return setHttpToken; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+
+
+var setHttpToken = function setHttpToken(token) {
+  if (Object(__WEBPACK_IMPORTED_MODULE_0_lodash__["isEmpty"])(token)) {
+    window.axios.defaults.headers.common['Authorization'] = null;
+  }
+
+  window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+};
 
 /***/ })
 /******/ ]);
