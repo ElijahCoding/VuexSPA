@@ -16862,9 +16862,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 /***/ }),
 /* 38 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
+var setToken = function setToken(state, token) {};
 
 /***/ }),
 /* 39 */
@@ -16874,6 +16877,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setToken", function() { return setToken; });
 var register = function register(_ref, _ref2) {
   var dispatch = _ref.dispatch;
   var payload = _ref2.payload,
@@ -16894,6 +16898,13 @@ var login = function login(_ref3, _ref4) {
   return axios.post('/api/login', payload).then(function (response) {}).catch(function (error) {
     context.errors = error.response.data.errors;
   });
+};
+
+var setToken = function setToken(_ref5, token) {
+  var commit = _ref5.commit,
+      dispatch = _ref5.dispatch;
+
+  commit('setToken', token);
 };
 
 /***/ }),
